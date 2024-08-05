@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li.completed {
+    text-decoration: line-through;
+    color: #fff;
+    background-color: black;
+}
+
+li button {
+    background-color: #dc3545;
+    border-radius: 50%;
+}
+
+li button:hover {
+    background-color: #c82333;
+}
+
+</style>
+
+
+    <div class="container">
+        <h1>ToDo List</h1>
+        <input type="text" id="new-task-input" placeholder="Add a new task..." />
+        <button id="add-task-button">Add Task</button>
+        <ul id="task-list"></ul>
+    </div>
+    <script>
+        
+        // khởi tạo các DOM
+        const taskInput = document.getElementById('new-task-input')
+        const taskAddButton = document.getElementById('add-task-button')
+        const taskList = document.getElementById('task-list')
+
+        // khởi tạo sự kiện nhấn nút thêm task
+        taskAddButton.addEventListener('click' , addTaskNew)
+
+        // gọi hàm xử lí sự kiện thêm task
+        function addTaskNew() {
+            
+            // xử lí sự kiện nhập vào 
+            const AddtaskItem = taskInput.value.trim()
+            if (AddtaskItem === '') {
+                alert('Please , Enter your task !')
+                return
+            }
+
+
+            // thêm mới task 
+            const taskItem = document.createElement('li')
+            taskItem.textContent = AddtaskItem
+            taskList.appendChild(taskItem)
+
+            // xóa task
+            const deleteTask = document.createElement('button')
+            deleteTask.textContent = 'x'
+            deleteTask.addEventListener('click' , () => taskList.removeChild(taskItem))
+            taskItem.appendChild(deleteTask)
+
+            // thêm sự kiện click để mô tả hoàn thành công việc
+            taskItem.addEventListener('click' , () => {
+                taskItem.classList.toggle('completed')
+            })
+        }
+        
+
+
+    </script>
+</body>
+</html>
